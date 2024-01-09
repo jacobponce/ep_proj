@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REP</title>
+    <style>
+        body {
+            background-color: grey;
+            color: lavender;
+            font-family: "Roboto", sans-serif;
+        }
+        h1 {
+            text-align: left;
+            font-size: 3em;
+            font-family: "Roboto", sans-serif;
+        }
+        h2 {
+            text-align: left;
+            font-family: "Roboto", sans-serif;
+            h1 {
+                text-align: left;
+                font-size: 3em;
+                font-family: "Roboto", sans-serif;
+                margin-bottom: 0px; /* Adjust the margin value as needed */
+            }
+            font-size: 15px; /* Set the font size to 13 pixels */
+        } 
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            margin-top: 20px;
+            width: 200px;
+            height: 400px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        input {
+            width: 200px;
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        button {
+            width: 200px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rodrygo's Exercise Program</h1>
+    <h2>Welcome to Rodrygo's Exercise Program, a week-by-week schedule designed to increase your strength and muscle.🏋️‍♂️💪</h2>
+    <div class="input-container">
+        <select>
+            <option value="bench press">Benchy Press</option>
+            <option value="leg press">Leg Press</option>
+            <option value="deadlift">Deadlift</option>
+        </select>
+
+        <input type="text" placeholder="Max Weight">
+
+        <button onclick="getSchedule()" style="background-color: lavender; font-family: 'Roboto', sans-serif; color:darkslategray; border-radius: 10px;" 
+                {{exerciseSelected ? '' : 'disabled'}}> <!--This will disable the button if no exercise is given-->
+            Generate Schedule
+        </button>
+
+        <p id="go"></p>
+
+        <script>
+            function getSchedule() {
+                var maxWeight = document.querySelector('input[type="text"]').value;
+                var exercise = document.querySelector('select').value;
+                var table = document.createElement('table');
+                var tbody = document.createElement('tbody');
+
+                if (exercise === 'bench press') {
+                    // Day 1: 6 reps of 70% max weight
+                    var row1 = document.createElement('tr');
+                    var day1 = document.createElement('td');
+                    day1.textContent = 'Day 1';
+                    var reps1 = document.createElement('td');
+                    reps1.textContent = '6 reps';
+                    var weight1 = document.createElement('td');
+                    weight1.textContent = Math.round(maxWeight * 0.7 * 100) / 100 + ' lbs';
+                    row1.appendChild(day1);
+                    row1.appendChild(reps1);
+                    row1.appendChild(weight1);
+                    tbody.appendChild(row1);
+
+                    // Day 2: 5 reps of 74% max weight
+                    var row2 = document.createElement('tr');
+                    var day2 = document.createElement('td');
+                    day2.textContent = 'Day 2';
+                    var reps2 = document.createElement('td');
+                    reps2.textContent = '5 reps';
+                    var weight2 = document.createElement('td');
+                    weight2.textContent = Math.round(maxWeight * 0.74 * 100) / 100 + ' lbs';
+                    row2.appendChild(day2);
+                    row2.appendChild(reps2);
+                    row2.appendChild(weight2);
+                    tbody.appendChild(row2);
+
+                    // Day 3: 4 reps of 80% max weight
+                    var row3 = document.createElement('tr');
+                    var day3 = document.createElement('td');
+                    day3.textContent = 'Day 3';
+                    var reps3 = document.createElement('td');
+                    reps3.textContent = '4 reps';
+                    var weight3 = document.createElement('td');
+                    weight3.textContent = Math.round(maxWeight * 0.8 * 100) / 100 + ' lbs';
+                    row3.appendChild(day3);
+                    row3.appendChild(reps3);
+                    row3.appendChild(weight3);
+                    tbody.appendChild(row3);
+
+                    // Day 4: 3 reps of 84% max weight
+                    var row4 = document.createElement('tr');
+                    var day4 = document.createElement('td');
+                    day4.textContent = 'Day 4';
+                    var reps4 = document.createElement('td');
+                    reps4.textContent = '3 reps';
+                    var weight4 = document.createElement('td');
+                    weight4.textContent = Math.round(maxWeight * 0.84 * 100) / 100 + ' lbs';
+                    row4.appendChild(day4);
+                    row4.appendChild(reps4);
+                    row4.appendChild(weight4);
+                    tbody.appendChild(row4);
+                } else if (exercise === 'leg press') {
+                    // Add leg press exercise schedule here
+                } else if (exercise === 'deadlift') {
+                    // Add deadlift exercise schedule here
+                }
+
+                table.appendChild(tbody);
+                document.getElementById('go').innerHTML = '';
+                document.getElementById('go').appendChild(table);
+            // Style the table
+            table.style.borderCollapse = 'collapse';
+            table.style.width = '100%';
+            table.style.marginTop = '20px';
+
+            // Style the table cells
+            var tds = table.getElementsByTagName('td');
+            for (var i = 0; i < tds.length; i++) {
+                tds[i].style.padding = '10px';
+                tds[i].style.border = '1px solid lavender';
+            }
+
+            // Style the table header
+            var ths = table.getElementsByTagName('th');
+            for (var i = 0; i < ths.length; i++) {
+                ths[i].style.padding = '10px';
+                ths[i].style.border = '1px solid lavender';
+                ths[i].style.backgroundColor = 'darkslategray';
+                ths[i].style.color = 'lavender';
+            }
+
+            // Add CSS class to the table
+            table.classList.add('exercise-table');
+
+            // Add CSS class to the table rows
+            var trs = table.getElementsByTagName('tr');
+            for (var i = 0; i < trs.length; i++) {
+                trs[i].classList.add('exercise-row');
+            }
+
+            // Add CSS class to the table cells
+            var tds = table.getElementsByTagName('td');
+            for (var i = 0; i < tds.length; i++) {
+                tds[i].classList.add('exercise-cell');
+            }
+            
+            }
+        </script>
+    </div>
+</body>
+</html>
